@@ -7,12 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.mihaitacatalinpavel.newsreader.R;
 import com.mihaitacatalinpavel.newsreader.feature.articlelist.fragment.ArticleListFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class NewsFeedActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.news_feed_activity);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, ArticleListFragment.newInstance())

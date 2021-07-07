@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NewsReader">
-        <activity android:name=".feature.articlelist.MainActivity">
+        <activity android:name=".feature.articlelist.NewsFeedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

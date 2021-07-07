@@ -16,12 +16,14 @@ import com.example.data.ArticleRepository;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 
 public class ArticleViewModel extends AndroidViewModel implements LifecycleObserver {
 
     @NonNull
     public final ObservableList<ArticleItemViewModel> articles;
     private final ArticleRepository repo;
+    private Disposable disposable;
 
     public ArticleViewModel(Application application, ArticleRepository repo) {
         super(application);
@@ -47,5 +49,17 @@ public class ArticleViewModel extends AndroidViewModel implements LifecycleObser
 
     private void onError(Throwable throwable) {
         Log.e("ArticleViewModel", "onError", throwable);
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void fetchToDoList() {
+        if (articles.isEmpty()) {
+            disposable = repo.getArticleList()
+                    .map(new ArticleToArticleItemViewModel())
+                    .subscribe(
+                            this::onArticlesReceived,
+                            this::onError
+                    );
+        }
     }
 }
